@@ -1,10 +1,11 @@
 import express from 'express';
+import config from './config/index.js';
 import bookRoutes from './routes/book.routes.js';
 
 const app = express();
 app.use(express.json());
 
-app.get('/health', (req, res) => res.json({ status: 'ok' }));
+app.get('/health', (req, res) => res.json({ status: 'ok', env: config.env }));
 app.use('/books', bookRoutes);
 
 app.use((err, req, res, next) => {
